@@ -6,6 +6,9 @@ const NotFoundError = require('../errors/NotFoundError');
 const BadRequestError = require('../errors/BadRequestError');
 const ConflictError = require('../errors/ConflictError');
 
+const { NODE_ENV } = process.env;
+const JWT = process.env.REACT_APP_JWT;
+
 module.exports.getUser = (request, response, next) => {
   userSchema.findById(request.user._id)
     .then((user) => {
@@ -60,7 +63,6 @@ module.exports.updateUser = (request, response, next) => {
     });
 };
 
-// вроде исправила
 module.exports.createUser = (request, response, next) => {
   const {
     name,
@@ -106,7 +108,7 @@ module.exports.login = (request, response, next) => {
   return userSchema
     .findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'cat', {
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT : 'cat', {
         expiresIn: '1w',
       });
       response.send({ token });
