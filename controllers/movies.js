@@ -63,7 +63,7 @@ module.exports.deleteMovie = (request, response, next) => {
         throw new NotFoundError('User cannot be found');
       }
       if (request.user._id === movie.owner.toString()) {
-        return movie.remove();
+        return movie.deleteOne();
       }
       return next(new ForbiddenError('Attempting to delete another users movie'));
     })
