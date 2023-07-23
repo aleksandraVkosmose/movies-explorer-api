@@ -1,11 +1,6 @@
 const allowedCors = [
-  // 'http://mestoaalexandera.nomoredomains.rocks',
-  // 'https://mestoaalexandera.nomoredomains.rocks',
-  'https://api.moviesalexandera.nomoredomains.work',
-  'http://api.moviesalexandera.nomoredomains.work',
+  'https://moviesalexandera.nomoredomains.work',
   'http://localhost:3001',
-  'http://localhost:3000',
-  'localhost:3000',
 ];
 
 const handlerCORS = (request, response, next) => {
