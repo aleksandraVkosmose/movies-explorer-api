@@ -111,7 +111,7 @@ module.exports.login = (request, response, next) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT : 'cat', {
         expiresIn: '1w',
       });
-      response.send({ token });
+      response.send({ token, user });
     })
     .catch(next);
 };
